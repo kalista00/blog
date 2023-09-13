@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+  
+  <mapper namespace="project.teamtwo.mapper.BoardMapper" >
+  
+	  <select id="list" resultType="project.teamtwo.component.PictureDTO" >
+	  	select * from picture order by num desc
+	  </select>
+	  
+	  <select id="boardAll" resultType="project.teamtwo.component.PictureDTO">
+	  	select * from picture
+	  </select>
+	  
+	  <insert id="insert" > 
+	  	insert into picture (num,writer,id,title,content,pw,pic)
+	  	values(picture_seq.nextval,#{writer},#{id},#{title},#{content},#{pw},#{pic})
+	  </insert>
+	  
+	  <select id="read2" resultType="project.teamtwo.component.PictureDTO">
+	  	select * from picture where num = #{num}
+	  </select>
+	  
+	  <update id="modify">
+	  	update picture set writer=#{writer}, id=#{id}, title=#{title}, content=#{content}, pic=#{pic} where num=#{num}
+	  </update>
+	  
+	  <delete id="delete">
+	  	delete from picture where num = #{num}
+	  </delete>
+	  
+  </mapper>

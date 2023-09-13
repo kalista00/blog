@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+<mapper namespace="project.teamtwo.mapper.BorderMapper">
+
+<select id="borderList" resultType="borderDTO">
+	(<![CDATA[select * from(select e.*, rownum r from(select * from border order by reg desc)e) where r >=#{startRow} and r <=#{endRow}]]>)
+</select>
+
+<select id="count" resultType="int">
+	select count(*) from border
+</select>
+
+<insert id="insert">
+	insert into border(num,id,title,con,reg) values(border_seq.NEXTVAL, #{id}, #{title}, #{con}, sysdate)
+</insert>
+
+<select id="borderselect" resultType="borderDTO">
+	select * from border where num=#{num}
+</select>
+
+<update id="borderUpdate">
+	update border
+	<set>
+		<if test="title != null">title=#{title},</if>
+		<if test="con != null">con=#{con}</if>
+	</set>
+	where num=#{num}
+</update>
+
+<delete id="borderdelete">
+	delete from border where num=#{num}
+</delete>
+
+</mapper>

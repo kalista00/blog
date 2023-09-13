@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+<mapper namespace="project.teamtwo.mapper.OnlyimageMapper">
+
+<insert id="insert" >
+		insert into kimimage values(kimimage_seq.NEXTVAL,#{writer},#{title},#{picture},#{pw})
+</insert>
+
+<select id="select" resultType="OnlyimageDTO">
+	<![CDATA[select * from(select e.* , rownum r from(select * from kimimage order by num desc)e) where r >=#{startRow} and r <=#{endRow}]]>
+</select>
+
+<select id="count" resultType="int">
+	select count(*) from kimimage
+</select>
+
+
+<select id="content" resultType="OnlyimageDTO">
+	select * from kimimage where num=#{num}		 
+</select>
+
+<delete id="delete">
+	delete from kimimage where num=#{num}
+</delete>
+
+<update id="update">
+	update kimimage set title=#{title}, picture=#{picture} where num=#{num} and writer=#{writer}
+</update>
+</mapper>

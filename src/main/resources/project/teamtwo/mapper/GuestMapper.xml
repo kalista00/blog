@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+  <mapper namespace="project.teamtwo.mapper.GuestMapper">
+  		
+  	
+	<sql id = "guest">
+		select * from guestbook
+	</sql>	  	
+	  <insert id = "insert">
+	  	insert into guestbook values(seq1.nextval,#{writer},#{content},sysdate)
+	  </insert>
+	  
+	  <select id="guestList" resultType="project.teamtwo.component.GuestDTO">
+	  	<include refid="guest"/>order by num desc
+	  </select>
+	  
+	  
+	  <select id ="countGuest" resultType="int">
+	  	select count(*) from guestbook
+	  </select>
+	  
+	  <delete id = "delete">
+	  	delete from guestbook where num=#{num}
+	  </delete>
+	  
+	  <update id ="updateguest">
+	  	update guestbook set content=#{content} where num=#{num}
+	  </update>
+	  
+
+	
+		
+  
+  </mapper>
